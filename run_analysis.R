@@ -1,7 +1,7 @@
-#download file
-temp <- tempfile()
-download.file("https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip",temp)
-data <- unzip(temp)
+#download file (files have been included in this repository)
+#temp <- tempfile()
+#download.file("https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip",temp)
+#data <- unzip(temp)
 
 #create test data table, with descriptive variable names
 features <- read.table("./UCI HAR Dataset/features.txt")
@@ -29,22 +29,19 @@ all_data$activity[all_data$activity == 4] <- "sitting"
 all_data$activity[all_data$activity == 5] <- "standing"
 all_data$activity[all_data$activity == 6] <- "laying"
 
-#create second data set 
+#create second data set with the same columns as the all_data data frame
+#pull out unique user IDs and activities
 all_data_summary <- all_data[0,]
 uniqueSubjects <- unique(all_data$subjectID)
 uniqueActivities <- unique(all_data$activity)
+#use a for loop to calculate the averages of every variable for each activity and each subject
 for (subject in uniqueSubjects) {
 	for (activity in uniqueActivities) {
 		tempSubset <- all_data[(all_data$subjectID == subject & all_data$activity == activity),]
-		nrow(tempSubset)
 		means <- colMeans(tempSubset[,c(3:81)])
+#create a new row for each user activity and the means
 		newrow = c(tempSubset[1,1:2], means)
-		all_data_summary <- rbind(all_data_summary, data.frame(as.list(newrow), stringsAsFactors=FALSE))	
+#rbind the new row to the data frame
+		all_data_summary <- rbind(all_data_summary, data.frame(as.list(newrow), stringsAsFactors=FALSE))
 	}
 }
-
-
-
-
-
-
