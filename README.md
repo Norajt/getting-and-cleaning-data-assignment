@@ -9,6 +9,6 @@ Assignment for week four of Getting and Cleaning Data
 1. clone the repository from github
 2. set your working directory to the current directory (setwd)
 3. Run the R script. It will:
-     - load the necessary data
+     - download and read the source data
      - consolidate all the data into one data table
      - create a new data table that calculates the average for each variable in each observation of an activity for a subject

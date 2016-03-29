@@ -1,7 +1,7 @@
-#download file (files have been included in this repository)
-#temp <- tempfile()
-#download.file("https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip",temp)
-#data <- unzip(temp)
+#download source files
+temp <- tempfile()
+download.file("https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip",temp)
+data <- unzip(temp)
 
 #create test data table, with descriptive variable names
 features <- read.table("./UCI HAR Dataset/features.txt")
